@@ -3,7 +3,7 @@ import pytest
 from src.models.category import Category
 from src.models.product import Product
 
-# Fixtures для инициализации объектов
+# Фикстуры для инициализации объектов
 @pytest.fixture
 def create_product():
     return Product(
