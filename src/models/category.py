@@ -10,19 +10,30 @@ class Category:
     name: str
     description: str
     products: list
-    count_category = 0
-    count_products = 0
+    category_count = 0
+    product_count = 0
 
     def __init__(self, name, description, products):
         """Инициализация объекта"""
         self.name = name
         self.description = description
-        self.products = products if products else []
-        self.__class__.count_products += len(products)
-        self.__class__.count_category += 1
+        self.__products = products if products else []
+        self.__class__.product_count += len(products)
+        self.__class__.category_count += 1
 
-    def __str__(self):
+    def __str__(self) -> str|None:
         return f'Категория "{self.name}" содержит {len(self.products)} товар(а/ов)'
+
+    def add_product(self, product) -> None:
+        self.__products.append(product)
+        self.__class__.product_count += 1
+
+    @property
+    def products(self) -> str|None:
+        product_str = ''
+        for product in self.__products:
+            product_str += f'{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n'
+        return product_str or None
 
 
 if __name__ == "__main__":
@@ -53,5 +64,5 @@ if __name__ == "__main__":
     print(cat2.products)
 
     # Верные утверждения
-    print(f"Количество продуктов равно {Category.count_products}")
-    print(f"Количество категорий равно {Category.count_category}")
+    print(f"Количество продуктов равно {Category.product_count}")
+    print(f"Количество категорий равно {Category.category_count}")
