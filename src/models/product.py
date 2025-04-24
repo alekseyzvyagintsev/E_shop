@@ -1,6 +1,3 @@
-# from src.models.category import Category
-
-
 class Product:
     """Класс предоставляющий информацию о продукте"""
 
@@ -12,12 +9,27 @@ class Product:
     def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
-        self.price = price
+        self.__price = price
         self.quantity = quantity
 
     def __repr__(self):
         return f"\n{self.name}, {self.description}, {self.price:.2f} руб. Остаток: {self.quantity} шт."
 
+    @classmethod
+    def new_product(cls, dict_product):
+        if isinstance(dict_product, dict):
+            return cls(**dict_product)
+
+    @property
+    def price(self):
+        return self.__price
+
+    @price.setter
+    def price(self, new_price):
+        if new_price > 0:
+            self.__price = new_price
+        else:
+            raise TypeError('Цена не должна быть нулевая или отрицательная')
 
 if __name__ == "__main__":
     prod1 = Product(
