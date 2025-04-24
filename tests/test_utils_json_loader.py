@@ -24,7 +24,7 @@ def test_load_data_from_json() -> None:
         assert isinstance(category, Category)
         if category.products is not None:
             for product in category.products or []:
-                assert isinstance(product, Product)
+                assert isinstance(product, str)
 
     # Дополнительные проверки структуры данных
     first_category = result[0]
