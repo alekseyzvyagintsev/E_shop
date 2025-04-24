@@ -3,7 +3,6 @@ import json
 import os
 
 from src.models.category import Category
-from src.models.product import Product
 from src.utils import load_data_from_json
 
 # Определим путь к файлу products.json относительно корня проекта
