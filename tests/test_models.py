@@ -21,6 +21,11 @@ def second_product() -> Product:
 
 
 @pytest.fixture
+def fake_product() -> Product:
+    return Product(name="Rectangle", width=5, height=10)
+
+
+@pytest.fixture
 def create_category() -> Category:
     return Category(
         name="Смартфоны",
@@ -115,6 +120,10 @@ def test_add_product(create_category: Category, first_product: Product, second_p
         f"{second_product.name}, {second_product.price} руб. Остаток: {second_product.quantity} шт.\n"
     )
     assert create_category.products == expected_second_string
+
+    # Пытаемся добавить подставной продукт
+    with pytest.raises(ValueError, match=".*должен быть наследником Product"):
+        create_category.add_product(fake_product)
 
 
 def test_empty_products(create_category: Category) -> None:

@@ -34,9 +34,12 @@ class Category:
     def __str__(self) -> str:
         return f'Категория "{self.name}" содержит {len(self.__products)} товар(а/ов)'
 
-    def add_product(self, product: Any) -> None:
-        self.__products.append(product)
-        self.__class__.product_count += 1
+    def add_product(self, product: Product) -> None:
+        if isinstance(product, Product):
+            self.__products.append(product)
+            self.__class__.product_count += 1
+        else:
+            raise ValueError(f"{product.__name__} должен быть наследником Product!")
 
 
 if __name__ == "__main__":
