@@ -37,7 +37,7 @@ class Category:
             self.__products.append(product)
             self.__class__.product_count += 1
         else:
-            raise ValueError(f"{product.__name__} должен быть наследником Product!")
+            raise ValueError(f"{product} должен быть наследником Product!")
 
 
 if __name__ == "__main__":

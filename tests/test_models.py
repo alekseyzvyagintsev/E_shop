@@ -22,7 +22,7 @@ def second_product() -> Product:
 
 @pytest.fixture
 def fake_product():  # type: ignore
-    return Product(name="Rectangle", width=5, height=10)  # type: ignore
+    return {'name': 'Rectangle', 'width': 5, 'height': 10}  # type: ignore
 
 
 @pytest.fixture
@@ -121,6 +121,7 @@ def test_add_product(create_category: Category, first_product: Product, second_p
     )
     assert create_category.products == expected_second_string
 
+def test_add_fake_product(create_category, fake_product): # type: ignore
     # Пытаемся добавить подставной продукт
     with pytest.raises(ValueError, match=".*должен быть наследником Product"):
         create_category.add_product(fake_product)  # type: ignore
