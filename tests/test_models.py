@@ -1,5 +1,3 @@
-from typing import Any
-
 import pytest
 
 from src.models.category import Category
@@ -23,8 +21,8 @@ def second_product() -> Product:
 
 
 @pytest.fixture
-def fake_product(): # type: ignore
-    return Product(name="Rectangle", width=5, height=10) # type: ignore
+def fake_product():  # type: ignore
+    return Product(name="Rectangle", width=5, height=10)  # type: ignore
 
 
 @pytest.fixture
@@ -125,7 +123,7 @@ def test_add_product(create_category: Category, first_product: Product, second_p
 
     # Пытаемся добавить подставной продукт
     with pytest.raises(ValueError, match=".*должен быть наследником Product"):
-        create_category.add_product(fake_product) # type: ignore
+        create_category.add_product(fake_product)  # type: ignore
 
 
 def test_empty_products(create_category: Category) -> None:
