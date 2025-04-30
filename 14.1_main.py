@@ -1,3 +1,6 @@
+from src.models.category import Category
+from src.models.product import Product
+
 if __name__ == "__main__":
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
     product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
@@ -7,16 +10,19 @@ if __name__ == "__main__":
     print(product1.description)
     print(product1.price)
     print(product1.quantity)
+    print("-" * 100)
 
     print(product2.name)
     print(product2.description)
     print(product2.price)
     print(product2.quantity)
+    print("-" * 100)
 
     print(product3.name)
     print(product3.description)
     print(product3.price)
     print(product3.quantity)
+    print("-" * 100)
 
     category1 = Category("Смартфоны",
                          "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
@@ -27,6 +33,7 @@ if __name__ == "__main__":
     print(len(category1.products))
     print(category1.category_count)
     print(category1.product_count)
+    print("-" * 100)
 
     product4 = Product("55\" QLED 4K", "Фоновая подсветка", 123000.0, 7)
     category2 = Category("Телевизоры",
@@ -37,6 +44,8 @@ if __name__ == "__main__":
     print(category2.description)
     print(len(category2.products))
     print(category2.products)
+    print("-" * 100)
 
     print(Category.category_count)
     print(Category.product_count)
+    print("-" * 100)

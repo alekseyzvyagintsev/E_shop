@@ -4,54 +4,12 @@ from src.models.category import Category
 from src.models.product import Product
 
 
-# Фикстуры для инициализации объектов
-@pytest.fixture
-def first_product() -> Product:
-    return Product(
-        name="Samsung Galaxy C23 Ultra",
-        description="256GB, Серый цвет, 200MP камера",
-        price=180000.0,
-        quantity=5,
-    )
-
-
-@pytest.fixture
-def second_product() -> Product:
-    return Product(name="Galaxy Note", description="", price=799.99, quantity=5)
-
-
-@pytest.fixture
-def fake_product():  # type: ignore
-    return {'name': 'Rectangle', 'width': 5, 'height': 10}  # type: ignore
-
-
-@pytest.fixture
-def create_category() -> Category:
-    return Category(
-        name="Смартфоны",
-        description="Смартфоны, как средство общения",
-        products=[],
-    )
-
-
-@pytest.fixture
-def create_product_from_dict() -> Product:
-    return Product.new_product(
-        {
-            "name": "Samsung Galaxy C23 Ultra",
-            "description": "256GB, Серый цвет, 200MP камера",
-            "price": 180000.0,
-            "quantity": 5,
-        }
-    )
-
-
 # Тесты для класса Product
 def test_product_attributes(first_product: Product) -> None:
     """Проверка атрибутов объекта Product."""
     assert first_product.name == "Samsung Galaxy C23 Ultra"
     assert first_product.description == "256GB, Серый цвет, 200MP камера"
-    assert first_product.price == 180000.0
+    assert first_product.price == 20000.0
     assert first_product.quantity == 5
 
 
@@ -68,12 +26,12 @@ def test_product_after_new_product() -> None:
     assert TypeError("Данные принимаются в виде словаря")
 
 
-def test_product_repr(first_product: Product) -> None:
-    """Проверка метода __repr__()."""
-    expected_representation = (
-        "\nSamsung Galaxy C23 Ultra, 256GB, " "Серый цвет, 200MP камера, 180000.00 руб. Остаток: 5 шт."
+def test_product_str(first_product: Product) -> None:
+    """Проверка метода __str__()."""
+    expected_str = (
+        "Samsung Galaxy C23 Ultra, 20000.0 руб. Остаток: 5 шт.\n"
     )
-    assert repr(first_product) == expected_representation
+    assert str(first_product) == expected_str
 
 
 # Тесты для класса Category
@@ -143,3 +101,20 @@ def test_class_product_count_increase(create_category: Category, first_product: 
     new_class_product_count = Category.product_count
     expected_new_class_product_count = initial_class_product_count + 1
     assert new_class_product_count == expected_new_class_product_count
+
+
+def test_total_price_and_sum_product_true(first_product: Product, second_product: Product) -> None:
+    assert first_product.total_price() == 100000.0
+    assert second_product.total_price() == 40000.0
+    assert first_product + second_product == 140000.0
+
+def test_total_price_fake_product(fake_product): # type: ignore
+    # Пытаемся посчитать подставной продукт
+    with pytest.raises(ValueError):
+        fake_product.total_prise()  # type: ignore
+
+def test_total_price_fake_product(first_product, fake_product): # type: ignore
+    # Пытаемся сложить продукт с подставным продуктом
+    with pytest.raises(ValueError):
+        first_product + fake_product  # type: ignore
+

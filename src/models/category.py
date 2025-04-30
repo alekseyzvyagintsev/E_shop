@@ -22,17 +22,32 @@ class Category:
         self.__class__.product_count += len(products)
         self.__class__.category_count += 1
 
+    def __str__(self) -> str:
+        return f'Категория "{self.name}" содержит {len(self.__products)} товар(а/ов)'
+
+    def merge_categories(self, other: 'Category') -> 'Category':
+        """
+        Метод объединяет две категории в одну.
+        Новая категория содержит все товары из обеих категорий.
+        """
+        combined_name = f"{self.name} + {other.name}"
+        combined_desc = f"{self.description} | {other.description}"
+        combined_products = self.__products + other.__products
+        return Category(combined_name, combined_desc, combined_products)
+
+    @property
+    def list_products(self):
+        return self.__products
+
     @property
     def products(self) -> str | None:
         product_str = ""
         for product in self.__products:
-            product_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+            product_str += str(product)
         return product_str or None
 
-    def __str__(self) -> str:
-        return f'Категория "{self.name}" содержит {len(self.__products)} товар(а/ов)'
-
     def add_product(self, product: Product) -> None:
+        """ Добавление продукта и увеличение счетчика."""
         if isinstance(product, Product):
             self.__products.append(product)
             self.__class__.product_count += 1
@@ -62,33 +77,41 @@ if __name__ == "__main__":
     # Вывод результатов
     print(cat1)
     print(cat1.products)
+    # prod = ProductIterator(cat1)
+
+
+    # print(cat1.total_price_category())
     print("-" * 100)
 
-    print(cat2)
-    print(cat2.products)
-    print("-" * 100)
+    # print(cat2)
+    # print(cat2.products)
+    # print("-" * 100)
+    #
+    # # Верные утверждения
+    # print(f"Количество продуктов равно {Category.product_count}")
+    # print(f"Количество категорий равно {Category.category_count}")
+    # print("-" * 100)
+    #
+    # product1 = Product(
+    #     name="Samsung Galaxy C23 Ultra",
+    #     description="256GB, Серый цвет, 200MP камера",
+    #     price=180000.0,
+    #     quantity=5,
+    # )
+    #
+    # category = Category(
+    #     name="Смартфоны",
+    #     description="Смартфоны, как средство общения",
+    #     products=[product1],
+    # )
+    #
+    # """Проверка атрибутов объекта Category."""
+    # print(category.name)
+    # print(category.products)
+    # print(category.product_count)
+    # print('-' * 100)
 
-    # Верные утверждения
-    print(f"Количество продуктов равно {Category.product_count}")
-    print(f"Количество категорий равно {Category.category_count}")
-    print("-" * 100)
+    # print(iter(cat1))
 
-    product1 = Product(
-        name="Samsung Galaxy C23 Ultra",
-        description="256GB, Серый цвет, 200MP камера",
-        price=180000.0,
-        quantity=5,
-    )
-
-    category = Category(
-        name="Смартфоны",
-        description="Смартфоны, как средство общения",
-        products=[product1],
-    )
-
-    """Проверка атрибутов объекта Category."""
-    print(category.name)
-    print(category.products)
-    print(category.product_count)
 
 #############################################################################################################
