@@ -1,4 +1,6 @@
 ##################################################################################################
+from typing import Any
+
 import pytest
 
 from src.models.category import Category
@@ -8,11 +10,12 @@ from src.models.product import Product
 
 # Фикстуры для инициализации объектов
 @pytest.fixture
-def iterator(category_with_products):
+def iterator(category_with_products: "Category") -> "ProductIterator":
     return ProductIterator(category_with_products)
 
+
 @pytest.fixture
-def first_product() -> Product:
+def first_product() -> "Product":
     return Product(
         "Samsung Galaxy C23 Ultra",
         "256GB, Серый цвет, 200MP камера",
@@ -22,32 +25,22 @@ def first_product() -> Product:
 
 
 @pytest.fixture
-def second_product() -> Product:
-    return Product(
-        "Galaxy Note",
-        "",
-        8000.00,
-        5
-    )
+def second_product() -> "Product":
+    return Product("Galaxy Note", "", 8000.00, 5)
 
 
 @pytest.fixture
-def third_product() -> Product:
-    return Product(
-        "Xiaomi Redmi Note 11",
-        "1024GB, Синий",
-        30000.0,
-        10
-    )
+def third_product() -> "Product":
+    return Product("Xiaomi Redmi Note 11", "1024GB, Синий", 30000.0, 10)
 
 
 @pytest.fixture
-def fake_product():  # type: ignore
-    return {'name': 'Rectangle', 'width': 5, 'height': 10}  # type: ignore
+def fake_product() -> dict[str, Any]:
+    return {"name": "Rectangle", "width": 5, "height": 10}
 
 
 @pytest.fixture
-def create_category() -> Category:
+def create_category() -> "Category":
     return Category(
         name="Смартфоны",
         description="Смартфоны, как средство общения",
@@ -56,7 +49,9 @@ def create_category() -> Category:
 
 
 @pytest.fixture
-def category_with_products(create_category, first_product, second_product, third_product) -> Category:
+def category_with_products(
+    create_category: "Category", first_product: "Product", second_product: "Product", third_product: "Product"
+) -> Category:
     products = create_category
     products.add_product(first_product)
     products.add_product(second_product)
@@ -65,7 +60,7 @@ def category_with_products(create_category, first_product, second_product, third
 
 
 @pytest.fixture
-def create_product_from_dict() -> Product:
+def create_product_from_dict() -> "Product":
     return Product.new_product(
         {
             "name": "Samsung Galaxy C23 Ultra",

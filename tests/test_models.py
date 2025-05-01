@@ -28,9 +28,7 @@ def test_product_after_new_product() -> None:
 
 def test_product_str(first_product: Product) -> None:
     """Проверка метода __str__()."""
-    expected_str = (
-        "Samsung Galaxy C23 Ultra, 20000.0 руб. Остаток: 5 шт.\n"
-    )
+    expected_str = "Samsung Galaxy C23 Ultra, 20000.0 руб. Остаток: 5 шт.\n"
     assert str(first_product) == expected_str
 
 
@@ -79,7 +77,8 @@ def test_add_product(create_category: Category, first_product: Product, second_p
     )
     assert create_category.products == expected_second_string
 
-def test_add_fake_product(create_category, fake_product): # type: ignore
+
+def test_add_fake_product(create_category, fake_product):  # type: ignore
     # Пытаемся добавить подставной продукт
     with pytest.raises(ValueError, match=".*должен быть наследником Product"):
         create_category.add_product(fake_product)  # type: ignore
@@ -108,13 +107,14 @@ def test_total_price_and_sum_product_true(first_product: Product, second_product
     assert second_product.total_price() == 40000.0
     assert first_product + second_product == 140000.0
 
-def test_total_price_fake_product(fake_product): # type: ignore
+
+def test_total_price_fake_product(fake_product):  # type: ignore
     # Пытаемся посчитать подставной продукт
-    with pytest.raises(ValueError):
+    with pytest.raises(AttributeError):
         fake_product.total_prise()  # type: ignore
 
-def test_total_price_fake_product(first_product, fake_product): # type: ignore
+
+def test_sum_with_fake_product(first_product, fake_product):  # type: ignore
     # Пытаемся сложить продукт с подставным продуктом
     with pytest.raises(ValueError):
         first_product + fake_product  # type: ignore
-

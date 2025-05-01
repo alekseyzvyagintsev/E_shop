@@ -5,7 +5,7 @@ from src.models.category import Category
 from src.models.iterator import ProductIterator
 
 
-def test_product_iterator(category_with_products: Category, iterator) -> None:
+def test_product_iterator(category_with_products: "Category", iterator: "ProductIterator") -> None:
     """
     Проверяем порядок вывода продуктов через next()
     """
@@ -18,7 +18,7 @@ def test_product_iterator(category_with_products: Category, iterator) -> None:
     assert results == category_with_products.list_products
 
 
-def test_stop_iteration(iterator):
+def test_stop_iteration(iterator: "ProductIterator") -> None:
     """
     Проверка исключения StopIteration при исчерпании продуктов
     """
@@ -40,4 +40,6 @@ def test_empty_category(create_category: Category) -> None:
     it = ProductIterator(empty_cat)
     with pytest.raises(StopIteration):
         next(it)
+
+
 ##################################################################################################

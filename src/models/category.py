@@ -25,7 +25,7 @@ class Category:
     def __str__(self) -> str:
         return f'Категория "{self.name}" содержит {len(self.__products)} товар(а/ов)'
 
-    def merge_categories(self, other: 'Category') -> 'Category':
+    def merge_categories(self, other: "Category") -> "Category":
         """
         Метод объединяет две категории в одну.
         Новая категория содержит все товары из обеих категорий.
@@ -36,7 +36,7 @@ class Category:
         return Category(combined_name, combined_desc, combined_products)
 
     @property
-    def list_products(self):
+    def list_products(self) -> "list[Product]":
         return self.__products
 
     @property
@@ -47,7 +47,7 @@ class Category:
         return product_str or None
 
     def add_product(self, product: Product) -> None:
-        """ Добавление продукта и увеличение счетчика."""
+        """Добавление продукта и увеличение счетчика."""
         if isinstance(product, Product):
             self.__products.append(product)
             self.__class__.product_count += 1
@@ -78,7 +78,6 @@ if __name__ == "__main__":
     print(cat1)
     print(cat1.products)
     # prod = ProductIterator(cat1)
-
 
     # print(cat1.total_price_category())
     print("-" * 100)

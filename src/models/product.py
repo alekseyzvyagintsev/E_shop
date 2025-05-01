@@ -26,19 +26,16 @@ class Product:
 
     def total_price(self) -> float:
         """Суммарная стоимость остатков продукта."""
-        if type(self) is Product:
-            return self.price * self.quantity
-        else:
-            raise ValueError(f"{self} должен быть наследником Product!")
+        return self.price * self.quantity
 
-    def __add__(self, other) -> Any:
-        if type(self) == type(other):
+    def __add__(self, other: "Product") -> float:
+        if isinstance(other, Product):
             return self.total_price() + other.total_price()
         else:
             raise ValueError(f"Оба объекта {self} и {other} должны быть наследниками Product!")
 
     @classmethod
-    def new_product(cls: type[T], dict_product: Dict[str, Any]) -> T:
+    def new_product(cls: type["Product"], dict_product: Dict[str, Any]) -> "Product":
         if isinstance(dict_product, dict):
             return cls(**dict_product)
         else:
@@ -52,8 +49,8 @@ class Product:
     def price(self, new_price: float) -> None:
         if new_price > 0:
             if new_price < self.__price:
-                user_choice = input('Вы уверены, что цену нужно снизить? Y/N ')
-                if user_choice == 'Y' or user_choice == 'y':
+                user_choice = input("Вы уверены, что цену нужно снизить? Y/N ")
+                if user_choice == "Y" or user_choice == "y":
                     self.__price = new_price
                 return
         else:
@@ -68,16 +65,16 @@ if __name__ == "__main__":
     print(prod1)
     print(prod2)
     print(prod3)
-    print('-' * 100)
+    print("-" * 100)
 
     print(prod1.total_price())
     print(prod2.total_price())
     print(prod3.total_price())
-    print('-' * 100)
+    print("-" * 100)
 
     print(prod1 + prod2)
     print(prod1 + prod3)
-    print('-' * 100)
+    print("-" * 100)
 
     # print(prod1.price)
     # prod1.price = 179999.9
