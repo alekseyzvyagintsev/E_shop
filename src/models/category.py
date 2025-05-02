@@ -23,7 +23,10 @@ class Category:
         self.__class__.category_count += 1
 
     def __str__(self) -> str:
-        return f'Категория "{self.name}" содержит {len(self.__products)} товар(а/ов)'
+        prod_counter = 0
+        for product in self.__products:
+            prod_counter += product.quantity
+        return f'{self.name}, количество продуктов: {prod_counter} шт.'
 
     def merge_categories(self, other: "Category") -> "Category":
         """
@@ -82,35 +85,32 @@ if __name__ == "__main__":
     # print(cat1.total_price_category())
     print("-" * 100)
 
-    # print(cat2)
-    # print(cat2.products)
-    # print("-" * 100)
-    #
-    # # Верные утверждения
-    # print(f"Количество продуктов равно {Category.product_count}")
-    # print(f"Количество категорий равно {Category.category_count}")
-    # print("-" * 100)
-    #
-    # product1 = Product(
-    #     name="Samsung Galaxy C23 Ultra",
-    #     description="256GB, Серый цвет, 200MP камера",
-    #     price=180000.0,
-    #     quantity=5,
-    # )
-    #
-    # category = Category(
-    #     name="Смартфоны",
-    #     description="Смартфоны, как средство общения",
-    #     products=[product1],
-    # )
-    #
-    # """Проверка атрибутов объекта Category."""
-    # print(category.name)
-    # print(category.products)
-    # print(category.product_count)
-    # print('-' * 100)
+    print(cat2)
+    print(cat2.products)
+    print("-" * 100)
 
-    # print(iter(cat1))
+    # Верные утверждения
+    print(f"Количество продуктов равно {Category.product_count}")
+    print(f"Количество категорий равно {Category.category_count}")
+    print("-" * 100)
 
+    product1 = Product(
+        name="Samsung Galaxy C23 Ultra",
+        description="256GB, Серый цвет, 200MP камера",
+        price=180000.0,
+        quantity=5,
+    )
+
+    category = Category(
+        name="Смартфоны",
+        description="Смартфоны, как средство общения",
+        products=[product1],
+    )
+
+    """Проверка атрибутов объекта Category."""
+    print(category.name)
+    print(category.products)
+    print(category.product_count)
+    print('-' * 100)
 
 #############################################################################################################
