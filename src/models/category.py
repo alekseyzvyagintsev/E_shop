@@ -26,7 +26,7 @@ class Category:
         prod_counter = 0
         for product in self.__products:
             prod_counter += product.quantity
-        return f'{self.name}, количество продуктов: {prod_counter} шт.'
+        return f"{self.name}, количество продуктов: {prod_counter} шт."
 
     def merge_categories(self, other: "Category") -> "Category":
         """
@@ -111,6 +111,6 @@ if __name__ == "__main__":
     print(category.name)
     print(category.products)
     print(category.product_count)
-    print('-' * 100)
+    print("-" * 100)
 
 #############################################################################################################
