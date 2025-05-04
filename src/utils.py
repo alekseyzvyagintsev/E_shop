@@ -37,8 +37,8 @@ if __name__ == "__main__":
     loaded_categories = load_data_from_json(path_to_file)
 
     # Печать информации о категориях и продуктах
-    for category in loaded_categories:
-        print(f"Категория: {category.name}")
-        print(f"Описание: {category.description}")
-        print(f"Продукты: {category.products}")
+    for cat in loaded_categories:
+        print(f"Категория: {cat.name}")
+        print(f"Описание: {cat.description}")
+        print(f"Продукты: {cat.products}")
         print("-" * 50)

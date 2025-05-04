@@ -18,24 +18,24 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
-    # def __repr__(self) -> str:
-    #     return f"\n{self.name}, {self.description}, {self.price:.2f} руб. Остаток: {self.quantity} шт."
-
     def __str__(self) -> str:
+        """Метод выводит информацию об остатке продукта в отформатированном виде"""
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт.\n"
 
     def total_price(self) -> float:
         """Суммарная стоимость остатков продукта."""
         return self.price * self.quantity
 
-    def __add__(self, other: "Any") -> float:
-        if type(self) == type(other):
+    def __add__(self, other: "Product") -> float:
+        """Метод сложения продуктов. Складывает только однотипные продукты"""
+        if type(self) is type(other):
             return self.total_price() + other.total_price()
         else:
             raise TypeError(f"Оба объекта {self} и {other} должны быть наследниками одного класса!")
 
     @classmethod
     def new_product(cls: type["Product"], dict_product: Dict[str, Any]) -> "Product":
+        """Метод добавления нового продукта"""
         if isinstance(dict_product, dict):
             return cls(**dict_product)
         else:
@@ -43,10 +43,15 @@ class Product:
 
     @property
     def price(self) -> float:
+        """Метод выводит копию данных скрывая атрибут их содержащий"""
         return self.__price
 
     @price.setter
     def price(self, new_price: float) -> None:
+        """
+        Метод для изменения цены в скрытом атрибуте с проверкой,
+        что новая цена выше нуля и переспрашивает при снижении цены
+        """
         if new_price > 0:
             if new_price < self.__price:
                 user_choice = input("Вы уверены, что цену нужно снизить? Y/N ")

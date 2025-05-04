@@ -23,6 +23,10 @@ class Category:
         self.__class__.category_count += 1
 
     def __str__(self) -> str:
+        """
+        Метод выводит информацию о количестве продуктов в категории
+        в отформатированном виде
+        """
         prod_counter = 0
         for product in self.__products:
             prod_counter += product.quantity
@@ -40,7 +44,7 @@ class Category:
 
     @property
     def list_products(self) -> "list[Product]":
-        """ Метод возвращает список продуктов как есть без форматирования """
+        """Метод возвращает список продуктов как есть без форматирования"""
         return self.__products
 
     @property
@@ -55,7 +59,10 @@ class Category:
         return product_str or None
 
     def add_product(self, product: Product) -> None:
-        """Добавление продукта и увеличение счетчика."""
+        """
+        Добавление однотипного продукта в категорию
+        и увеличение счетчика.
+        """
         if isinstance(product, Product):
             self.__products.append(product)
             self.__class__.product_count += 1

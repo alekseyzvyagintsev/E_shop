@@ -29,7 +29,7 @@ def test_category_str(create_category: "Category", first_product: "Product") -> 
 
 
 def test_add_product_counter(create_category: "Category", first_product: "Product", second_product: "Product") -> None:
-    # Проверяем счетчик продуктов.
+    """Проверяем счетчик продуктов."""
 
     # Начальное количество продуктов в категории
     initial_product_count = Category.product_count
@@ -48,6 +48,8 @@ def test_add_product_counter(create_category: "Category", first_product: "Produc
 
 
 def test_add_product(create_category: "Category", first_product: "Product", second_product: "Product") -> None:
+    """Проверка работоспособность метода добавления продукта в категорию"""
+
     # Добавляем первый продукт
     create_category.add_product(first_product)
     expected_first_string = f"{first_product.name}, {first_product.price} руб. Остаток: {first_product.quantity} шт.\n"
@@ -69,34 +71,21 @@ def test_add_fake_product(create_category, fake_product):  # type: ignore
 
 
 def test_empty_products(create_category: "Category") -> None:
-    # Сначала проверим начальное состояние
+    # Проверка начального состояния
     assert create_category.products is None
 
 
-def test_class_product_count_increase(create_category: "Category", first_product: "Product") -> None:
-    # Изначально проверяем количество продуктов в классе
-    initial_class_product_count = Category.product_count
-
-    # Добавляем продукт
-    create_category.add_product(first_product)
-
-    # Проверяем увеличение количества продуктов в классе
-    new_class_product_count = Category.product_count
-    expected_new_class_product_count = initial_class_product_count + 1
-    assert new_class_product_count == expected_new_class_product_count
-
 def test_add_any_product(
-        create_category: "Category",
-        second_product: "Product",
-        smartphone: Smartphone,
-        lawngrass: LawnGrass
-    ) -> None:
+    create_category: "Category", second_product: "Product", smartphone: Smartphone, lawngrass: LawnGrass
+) -> None:
+    """Проверка добавления продуктов их разных подклассов"""
     create_category.add_product(second_product)
     create_category.add_product(smartphone)
     create_category.add_product(lawngrass)
 
-    assert second_product.name == 'Galaxy Note'
-    assert smartphone.name == 'Samsung Galaxy S23 Ultra'
-    assert lawngrass.name == 'Газонная трава'
-    
+    assert second_product.name == "Galaxy Note"
+    assert smartphone.name == "Samsung Galaxy S23 Ultra"
+    assert lawngrass.name == "Газонная трава"
+
+
 ############################################################################################################
