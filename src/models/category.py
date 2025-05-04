@@ -40,10 +40,15 @@ class Category:
 
     @property
     def list_products(self) -> "list[Product]":
+        """ Метод возвращает список продуктов как есть без форматирования """
         return self.__products
 
     @property
     def products(self) -> str | None:
+        """
+        Метод возвращает все продукты категории отдельной -
+        отформатированной, методом __str__, строкой
+        """
         product_str = ""
         for product in self.__products:
             product_str += str(product)
@@ -55,7 +60,7 @@ class Category:
             self.__products.append(product)
             self.__class__.product_count += 1
         else:
-            raise ValueError(f"{product} должен быть наследником Product!")
+            raise TypeError(f"{product} должен быть наследником Product!")
 
 
 if __name__ == "__main__":

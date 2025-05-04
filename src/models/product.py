@@ -28,11 +28,11 @@ class Product:
         """Суммарная стоимость остатков продукта."""
         return self.price * self.quantity
 
-    def __add__(self, other: "Product") -> float:
-        if isinstance(other, Product):
+    def __add__(self, other: "Any") -> float:
+        if type(self) == type(other):
             return self.total_price() + other.total_price()
         else:
-            raise ValueError(f"Оба объекта {self} и {other} должны быть наследниками Product!")
+            raise TypeError(f"Оба объекта {self} и {other} должны быть наследниками одного класса!")
 
     @classmethod
     def new_product(cls: type["Product"], dict_product: Dict[str, Any]) -> "Product":
