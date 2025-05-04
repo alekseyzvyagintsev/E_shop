@@ -34,8 +34,11 @@ class Product:
             raise TypeError(f"Оба объекта {self} и {other} должны быть наследниками одного класса!")
 
     @classmethod
-    def new_product(cls: type["Product"], dict_product: Dict[str, Any]) -> "Product":
-        """Метод добавления нового продукта"""
+    def new_product(cls, dict_product: Dict[str, Any]) -> "Product":
+        """
+        Метод добавления нового продукта из словаря
+        например при чтении из файла
+        """
         if isinstance(dict_product, dict):
             return cls(**dict_product)
         else:

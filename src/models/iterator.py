@@ -37,10 +37,8 @@ if __name__ == "__main__":
 
     iterator = ProductIterator(cat)
 
-    for product in iterator:
-        print(product)
-    for product in iterator:
-        print(product)
+    print(next(iterator))
+    print(next(iterator))
     for product in iterator:
         print(product)
     for product in iterator:
