@@ -1,5 +1,5 @@
 import json
-import os
+# import os
 
 from src.models.category import Category
 from src.models.product import Product
@@ -32,13 +32,15 @@ def load_data_from_json(file_path: str) -> list[Category]:
     return categories
 
 
-if __name__ == "__main__":
-    path_to_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data/products.json")
-    loaded_categories = load_data_from_json(path_to_file)
+# if __name__ == "__main__":
+#     path_to_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data/products.json")
+#     loaded_categories = load_data_from_json(path_to_file)
+#
+#     # Печать информации о категориях и продуктах
+#     for cat in loaded_categories:
+#         print(f"Категория: {cat.name}")
+#         print(f"Описание: {cat.description}")
+#         print(f"Продукты: {cat.products}")
+#         print("-" * 50)
 
-    # Печать информации о категориях и продуктах
-    for cat in loaded_categories:
-        print(f"Категория: {cat.name}")
-        print(f"Описание: {cat.description}")
-        print(f"Продукты: {cat.products}")
-        print("-" * 50)
+#######################################################################################################

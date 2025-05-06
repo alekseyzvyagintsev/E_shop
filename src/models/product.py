@@ -65,24 +65,24 @@ class Product:
             raise TypeError("Цена не должна быть нулевая или отрицательная")
 
 
-if __name__ == "__main__":
-    prod1 = Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
-    prod2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
-    prod3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
-
-    print(prod1)
-    print(prod2)
-    print(prod3)
-    print("-" * 100)
-
-    print(prod1.total_price())
-    print(prod2.total_price())
-    print(prod3.total_price())
-    print("-" * 100)
-
-    print(prod1 + prod2)
-    print(prod1 + prod3)
-    print("-" * 100)
+# if __name__ == "__main__":
+#     prod1 = Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+#     prod2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+#     prod3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+#
+#     print(prod1)
+#     print(prod2)
+#     print(prod3)
+#     print("-" * 100)
+#
+#     print(prod1.total_price())
+#     print(prod2.total_price())
+#     print(prod3.total_price())
+#     print("-" * 100)
+#
+#     print(prod1 + prod2)
+#     print(prod1 + prod3)
+#     print("-" * 100)
 
     # print(prod1.price)
     # prod1.price = 179999.9
