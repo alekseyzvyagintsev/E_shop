@@ -5,17 +5,21 @@ import pytest
 
 from src.models.category import Category
 from src.models.iterator import ProductIterator
+from src.models.lawngrass import LawnGrass
 from src.models.product import Product
+from src.models.smartphone import Smartphone
 
 
 # Фикстуры для инициализации объектов
 @pytest.fixture
 def iterator(category_with_products: "Category") -> "ProductIterator":
+    """Создаем итератор для тестов"""
     return ProductIterator(category_with_products)
 
 
 @pytest.fixture
 def first_product() -> "Product":
+    """Создаем для тестов первый продукт"""
     return Product(
         "Samsung Galaxy C23 Ultra",
         "256GB, Серый цвет, 200MP камера",
@@ -26,21 +30,39 @@ def first_product() -> "Product":
 
 @pytest.fixture
 def second_product() -> "Product":
+    """Создаем для тестов второй продукт"""
     return Product("Galaxy Note", "", 8000.00, 5)
 
 
 @pytest.fixture
 def third_product() -> "Product":
+    """Создаем для тестов третий продукт"""
     return Product("Xiaomi Redmi Note 11", "1024GB, Синий", 30000.0, 10)
 
 
 @pytest.fixture
+def smartphone() -> "Smartphone":
+    """Создаем для тестов отдельный продукт через подкласс Smartphone"""
+    return Smartphone(
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
+    )
+
+
+@pytest.fixture
+def lawngrass() -> "LawnGrass":
+    """Создаем для тестов отдельный продукт через подкласс LawnGrass"""
+    return LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
+
+
+@pytest.fixture
 def fake_product() -> dict[str, Any]:
+    """Создаем для тестов не продукт"""
     return {"name": "Rectangle", "width": 5, "height": 10}
 
 
 @pytest.fixture
 def create_category() -> "Category":
+    """Создаем для тестов категорию"""
     return Category(
         name="Смартфоны",
         description="Смартфоны, как средство общения",
@@ -52,6 +74,7 @@ def create_category() -> "Category":
 def category_with_products(
     create_category: "Category", first_product: "Product", second_product: "Product", third_product: "Product"
 ) -> Category:
+    """Создаем для тестов категорию с продуктами"""
     products = create_category
     products.add_product(first_product)
     products.add_product(second_product)
@@ -61,6 +84,7 @@ def category_with_products(
 
 @pytest.fixture
 def create_product_from_dict() -> "Product":
+    """Создаем для тестов продукт из словаря"""
     return Product.new_product(
         {
             "name": "Samsung Galaxy C23 Ultra",
