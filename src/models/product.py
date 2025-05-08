@@ -1,10 +1,13 @@
 ###########################################################################################################
 from typing import Any, Dict, TypeVar
 
+from src.models.base_product import BaseProduct
+from src.models.reprmixin import ReprMixin
+
 T = TypeVar("T")
 
 
-class Product:
+class Product(BaseProduct, ReprMixin):
     """Класс предоставляющий информацию о продукте"""
 
     name: str
@@ -17,6 +20,7 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self) -> str:
         """Метод выводит информацию об остатке продукта в отформатированном виде"""
@@ -83,10 +87,10 @@ class Product:
 #     print(prod1 + prod2)
 #     print(prod1 + prod3)
 #     print("-" * 100)
-
-    # print(prod1.price)
-    # prod1.price = 179999.9
-    # print(prod1.price)
+#
+#     print(prod1.price)
+#     prod1.price = 179999.9
+#     print(prod1.price)
 #     print('-' * 100)
 
 ###########################################################################################################
