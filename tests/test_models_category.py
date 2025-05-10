@@ -84,8 +84,24 @@ def test_add_any_product(
     create_category.add_product(lawngrass)
 
     assert second_product.name == "Galaxy Note"
-    assert smartphone.name == "Samsung Galaxy S23 Ultra"
+    assert smartphone.name == "Samsung Galaxy"
     assert lawngrass.name == "Газонная трава"
+
+
+def test_middle_price_of_category_with_products(
+    create_category: "Category", first_product: "Product", third_product: "Product"
+) -> None:
+    create_category.add_product(first_product)
+    create_category.add_product(third_product)
+    assert create_category.middle_price() == 25000.0
+
+
+def test_middle_price_of_category_without_products(
+    capsys: pytest.CaptureFixture[str], create_category: "Category"
+) -> None:
+    assert create_category.middle_price() == 0
+    message = capsys.readouterr()
+    assert message.out.strip() == "В этой категории 0шт. товар(а/ов)"
 
 
 ############################################################################################################

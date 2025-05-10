@@ -15,13 +15,19 @@ def test_product_class_withe_repr_mixin(capsys: Any, third_product: "Product") -
 def test_lawngrass_class_withe_repr_mixin(capsys: Any, lawngrass: "LawnGrass") -> None:
     """Тест фактического включения миксина в класс lawngrass и корректности вывода сообщения"""
     message = capsys.readouterr()
-    assert message.out.strip() == "LawnGrass, Газонная трава, Элитная трава для газона', 500.0, 20"
+    assert (
+        message.out.strip()
+        == "LawnGrass, Газонная трава, Элитная трава для газона', 500.0, 20, Россия, 7 дней, Зеленый"
+    )
 
 
 def test_smartphone_class_withe_repr_mixin(capsys: Any, smartphone: "Smartphone") -> None:
     """Тест фактического включения миксина в класс smartphone и корректности вывода сообщения"""
     message = capsys.readouterr()
-    assert message.out.strip() == "Smartphone, Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера', 180000.0, 5"
+    assert (
+        message.out.strip()
+        == "Smartphone, Samsung Galaxy, 256GB, Серый цвет, 200MP камера', 180000.0, 5, 95.5, S23 Ultra, 256, Серый"
+    )
 
 
 ##########################################################################################################

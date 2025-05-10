@@ -23,9 +23,14 @@ def test_product_after_new_product_from_dict(create_product_from_dict: Product) 
     assert create_product_from_dict.quantity == 5
 
 
-def test_product_after_new_product() -> None:
-    """Попытка обратиться к методу без словаря с данными о продукте."""
-    assert TypeError("Данные принимаются в виде словаря")
+def test_try_new_product_without_dict() -> None:
+    """
+    Проверяет, что метод 'product' выбрасывает исключение,
+    если принимает данные не в виде словаря.
+    """
+    with pytest.raises(TypeError) as e:  # "type: ignore"
+        Product.new_product(None)  # "type: ignore"
+    assert str(e.value) == "Данные принимаются в виде словаря"
 
 
 def test_product_str(first_product: Product) -> None:
@@ -55,7 +60,7 @@ def test_sum_with_fake_product(first_product, fake_product):  # type: ignore
 
 def test_create_smartphone(smartphone: "Smartphone") -> None:
     """Проверка инициализатора подкласса"""
-    assert smartphone.name == "Samsung Galaxy S23 Ultra"
+    assert smartphone.name == "Samsung Galaxy"
     assert smartphone.description == "256GB, Серый цвет, 200MP камера"
     assert smartphone.price == 180000.0
     assert smartphone.quantity == 5
@@ -86,6 +91,41 @@ def test_sum_simple_product_smartphone_grass_true(
         first_product + lawngrass
     with pytest.raises(TypeError):
         smartphone + lawngrass
+
+
+def test_add_product_with_zero_quantity() -> None:
+    """
+    Проверяет, что при попытке создания товара класса Product,
+    с нулевым количеством, возбуждается ValueError и выдается сообщение
+    """
+    with pytest.raises(ValueError) as e:
+        Product(
+            "Product",
+            "description",
+            1,
+            0,
+        )
+    assert str(e.value) == "Товар с нулевым количеством не может быть добавлен"
+
+
+def test_add_lawn_grass_with_zero_quantity() -> None:
+    """
+    Проверяет, что при попытке создания товара класса LawnGrass,
+    с нулевым количеством, возбуждается ValueError и выдается сообщение
+    """
+    with pytest.raises(ValueError) as e:
+        LawnGrass("Трава газонная", "описание", 1, 0, "Россия", "Неделя", "Зеленый")
+    assert str(e.value) == "Товар с нулевым количеством не может быть добавлен"
+
+
+def test_add_smartphone_with_negative_quantity() -> None:
+    """
+    Проверяет, что при попытке создания товара класса Smartphone,
+    с отрицательным количеством, возбуждается ValueError и выдается сообщение
+    """
+    with pytest.raises(ValueError) as e:
+        Smartphone("Смартфон", "описание", 1, -10, 95.5, "модель", 256, "серый")
+    assert str(e.value) == "Товар с нулевым количеством не может быть добавлен"
 
 
 ############################################################################################################
