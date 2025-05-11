@@ -69,6 +69,17 @@ class Category:
         else:
             raise TypeError(f"{product} должен быть наследником Product!")
 
+    def middle_price(self) -> float:
+        """
+        Подсчитывает среднюю цену товаров в категории, если категория пуста, то возвращается ноль.
+        """
+        try:
+            middle_prise = sum(product.price for product in self.__products) / len(self.list_products)
+            return middle_prise
+        except ZeroDivisionError:
+            print(f"В этой категории {len(self.list_products)}шт. товар(а/ов)")
+            return 0
+
 
 # if __name__ == "__main__":
 #     # Создание продуктов
